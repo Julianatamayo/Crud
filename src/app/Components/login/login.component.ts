@@ -21,8 +21,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   sendData() {
+    debugger;
     if (
-      this.iniciarSession.value.email ||
+      this.iniciarSession.value.email == '' ||
       this.iniciarSession.value.password == ''
     )
       return window.alert('Ingrese credenciales');

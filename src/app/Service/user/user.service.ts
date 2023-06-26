@@ -22,20 +22,17 @@ export class UserService {
       .then((result) => {
         this.SendVerificationMail();
         this.SetUserData(result.user, userInfo);
+        this.router.navigate(['login']);
+        window.alert('Ingrese sus datos para iniciar session');
       })
       .catch((error) => {
-        console.log('ENTSADSADSADSAD');
         window.alert(error.message);
       });
   }
 
   // Send email verfificaiton when new user sign up
   SendVerificationMail() {
-    return this.afAuth.currentUser
-      .then((u: any) => u.sendEmailVerification())
-      .then(() => {
-        this.router.navigate(['dashboard']); //Si se registra para al dashboard
-      });
+    return this.afAuth.currentUser.then((u: any) => u.sendEmailVerification());
   }
 
   //Guarda la informacion en database
