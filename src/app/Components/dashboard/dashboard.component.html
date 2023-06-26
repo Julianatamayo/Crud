@@ -1,0 +1,128 @@
+<div class="container">
+  <div
+    *ngIf="!allUsers"
+    class="d-flex align-items-center justify-content-center"
+    style="height: 100vh"
+  >
+    <div class="spinner-border" role="status"></div>
+  </div>
+
+  <nav *ngIf="allUsers" class="navbar bg-body-tertiary mt-5">
+    <div class="container-fluid">
+      <p class="h3 text-center">
+        Bienvenido:
+        <span class="h4 text-center"
+          >{{ loggedUser.name }} {{ loggedUser.apellido }}</span
+        >
+      </p>
+      <p class="h3 text-center">
+        Rol: <span class="h4 text-center">{{ loggedUser.rol }}</span>
+      </p>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button
+          class="btn btn-primary me-md-2"
+          [disabled]="!canEdit"
+          (click)="editUser()"
+        >
+          <i class="bi bi-pencil"></i>
+        </button>
+        <button
+          class="btn btn-primary me-md-2"
+          type="button"
+          routerLink="/create-employeds"
+        >
+          Agregar
+        </button>
+        <button class="btn btn-primary" type="button" (click)="logOut()">
+          Salir
+        </button>
+      </div>
+    </div>
+  </nav>
+  <!-- <div class="card mt-4"> -->
+  <div *ngIf="allUsers" class="body">
+    <!--Tabla de empleados-->
+    <div class="row text-center">
+      <div class="col-1">
+        <div class="my-3">ID</div>
+      </div>
+      <div class="col-2">
+        <div class="my-3">Nombre</div>
+      </div>
+      <div class="col-2">
+        <div class="my-3">Apellido</div>
+      </div>
+      <div class="col-3">
+        <div class="my-3">Correo</div>
+      </div>
+      <div class="col-2">
+        <div class="my-3">Rol</div>
+      </div>
+      <div class="col-2">
+        <div class="my-3">Acciones</div>
+      </div>
+    </div>
+    <div *ngFor="let user of allUsers; index as i">
+      <div class="row d-flex align-items-center justify-content-center">
+        <div class="col-1 text-center">
+          <div>{{ i + 1 }}</div>
+        </div>
+        <div class="col-2">
+          <div>
+            <input
+              type="text"
+              [value]="user.name"
+              size="8"
+              [disabled]="canEditUser"
+              (input)="capturarNombre($event)"
+            />
+          </div>
+        </div>
+        <div class="col-2">
+          <div>
+            <input
+              type="text"
+              [value]="user.apellido"
+              size="8"
+              [disabled]="canEditUser"
+              (input)="capturarApellido($event)"
+            />
+          </div>
+        </div>
+        <div class="col-3">
+          <div>
+            <input
+              type="text"
+              [value]="user.email"
+              size="22"
+              [disabled]="canEditUser"
+              (input)="capturarCorreo($event)"
+            />
+          </div>
+        </div>
+        <div class="col-2">
+          <div>{{ user.rol }}</div>
+        </div>
+        <div class="col-2">
+          <div class="d-flex justify-content-center">
+            <button
+              class="btn btn-primary m-2"
+              [disabled]="!canEdit"
+              (click)="editInfoUser(user)"
+            >
+              <i class="bi bi-check2"></i>
+            </button>
+            <button
+              class="btn btn-primary m-2"
+              [disabled]="!canEdit"
+              (click)="deleteInfoUser(user.uid)"
+            >
+              <i class="bi bi-trash3"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </div> -->

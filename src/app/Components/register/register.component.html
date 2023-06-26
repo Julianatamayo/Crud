@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>Registro</h1>
+
+      <form [formGroup]="registrarUsuario" (ngSubmit)="enviarFormulario()">
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            formControlName="identifiacion"
+            class="form-control"
+            placeholder="identificacion"
+          />
+          <label>Identificación</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            formControlName="name"
+            class="form-control"
+            placeholder="Name"
+          />
+          <label>Nombre</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input
+            type="lastname"
+            formControlName="apellido"
+            class="form-control"
+            placeholder="Lastname"
+          />
+          <label>Apellido</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input
+            type="phone"
+            formControlName="telefono"
+            class="form-control"
+            placeholder="Phone"
+          />
+          <label>Telefono</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            formControlName="email"
+            class="form-control"
+            placeholder="name@example.com"
+          />
+          <label for="floatingInput">Email</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            formControlName="password"
+            class="form-control"
+            placeholder="Password"
+          />
+          <label>Password</label>
+        </div>
+
+        <div>
+          <select formControlName="rol">
+            <option value="Administrador">Administrador</option>
+            <option value="Desarrollador">Desarrollador</option>
+            <option value="Comercial">Comercial</option>
+            <option value="Call center">Call center</option>
+          </select>
+        </div>
+
+        <div class="d-grid gap-2 d-grid mx-auto">
+          <button
+            class="btn btn-primary"
+            type="button"
+            (click)="enviarFormulario()"
+          >
+            Crear cuenta
+          </button>
+          <!--boton para regresar-->
+          <a routerLink="/login"
+            ><img
+              src="../../../assets/img/flecha-hacia-atras.png"
+              width="40"
+              alt="button "
+          /></a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
