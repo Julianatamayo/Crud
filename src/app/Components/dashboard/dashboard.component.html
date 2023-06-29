@@ -28,6 +28,7 @@
         </button>
         <button
           class="btn btn-primary me-md-2"
+          [disabled]="!canEdit"
           type="button"
           routerLink="/create-employeds"
         >
@@ -104,7 +105,7 @@
           <div>{{ user.rol }}</div>
         </div>
         <div class="col-2">
-          <div class="d-flex justify-content-center">
+          <div class="d-flex justify-content-center width-10">
             <button
               class="btn btn-primary m-2"
               [disabled]="!canEdit"

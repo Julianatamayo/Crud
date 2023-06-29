@@ -76,18 +76,19 @@ export class UserService {
   }
 
   getUserData(uid: any) {
-    return this.afs.collection('users').doc(uid).snapshotChanges();
+    return this.afs.collection('users').doc(uid).snapshotChanges(); //obtiene de un solo usurio
   }
 
   getAllUserData() {
-    return this.afs.collection('users').valueChanges(); //Manda toda la info
+    return this.afs.collection('users').valueChanges(); //obtiene la informacion de todos los usuario
   }
 
   editInfoUser(uid: any, data: any) {
-    return this.afs.collection('users').doc(uid).update(data);
+    return this.afs.collection('users').doc(uid).update(data); //edita un solo usuario
   }
 
   deleteUser(uid: any) {
-    return this.afs.collection('users').doc(uid).delete();
+    return this.afs.collection('users').doc(uid).delete(); //elimina un solo usuario
   }
+  
 }

@@ -60,4 +60,5 @@ export class DashboardComponent implements OnInit {
   capturarCorreo(event: any) {
     this.email = event.target.value;
   }
+  
 }

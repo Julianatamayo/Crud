@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   sendData() {
-    debugger;
     if (
       this.iniciarSession.value.email == '' ||
       this.iniciarSession.value.password == ''
