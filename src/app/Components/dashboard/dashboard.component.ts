@@ -16,6 +16,8 @@ export class DashboardComponent implements OnInit {
   name: any;
   apellido: any;
   email: any;
+  pagination: any;
+  finalAllUser: any;
 
   ngOnInit(): void {
     const userUid = localStorage.getItem('uid');
@@ -27,6 +29,10 @@ export class DashboardComponent implements OnInit {
 
     this.user.getAllUserData().subscribe((data) => {
       this.allUsers = data;
+      this.finalAllUser = this.allUsers.slice(0, 5);
+      this.pagination = Math.floor(this.allUsers.length / 5);
+
+      // console.log(this.pagination);
     });
   }
 
@@ -60,5 +66,13 @@ export class DashboardComponent implements OnInit {
   capturarCorreo(event: any) {
     this.email = event.target.value;
   }
-  
+  getNumberArray(n: number): number[] {
+    return Array.from({ length: n }, (value, index) => index + 1);
+  }
+  //paginacion
+  paginar(pag: any) {
+    let inicio = (pag - 1) * 5;
+    let final = pag * 5;
+    this.finalAllUser = this.allUsers.slice(inicio, final);
+  }
 }

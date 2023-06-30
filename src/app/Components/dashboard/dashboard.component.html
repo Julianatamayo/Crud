@@ -63,7 +63,7 @@
         <div class="my-3">Acciones</div>
       </div>
     </div>
-    <div *ngFor="let user of allUsers; index as i">
+    <div *ngFor="let user of finalAllUser; index as i">
       <div class="row d-flex align-items-center justify-content-center">
         <div class="col-1 text-center">
           <div>{{ i + 1 }}</div>
@@ -124,6 +124,15 @@
         </div>
       </div>
     </div>
+    <nav aria-label="...">
+      <ul class="pagination pagination-sm d-flex justify-content-center my-5">
+        <div *ngFor="let i of getNumberArray(pagination)">
+          <li class="page-item">
+            <a class="page-link" (click)="paginar(i)">{{ i }}</a>
+          </li>
+        </div>
+      </ul>
+    </nav>
   </div>
 </div>
 <!-- </div> -->
