@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container d-none d-sm-block">
   <div
     *ngIf="!allUsers"
     class="d-flex align-items-center justify-content-center"
@@ -21,14 +21,14 @@
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <button
           class="btn btn-primary me-md-2"
-          [disabled]="!canEdit"
+          *ngIf="canEdit"
           (click)="editUser()"
         >
           <i class="bi bi-pencil"></i>
         </button>
         <button
           class="btn btn-primary me-md-2"
-          [disabled]="!canEdit"
+          *ngIf="canEdit"
           type="button"
           routerLink="/create-employeds"
         >
@@ -60,7 +60,7 @@
         <div class="my-3">Rol</div>
       </div>
       <div class="col-2">
-        <div class="my-3">Acciones</div>
+        <div class="my-3" *ngIf="canEdit">Acciones</div>
       </div>
     </div>
     <div *ngFor="let user of finalAllUser; index as i">
@@ -108,14 +108,14 @@
           <div class="d-flex justify-content-center width-10">
             <button
               class="btn btn-primary m-2"
-              [disabled]="!canEdit"
+              *ngIf="canEdit"
               (click)="editInfoUser(user)"
             >
               <i class="bi bi-check2"></i>
             </button>
             <button
               class="btn btn-primary m-2"
-              [disabled]="!canEdit"
+              *ngIf="canEdit"
               (click)="deleteInfoUser(user.uid)"
             >
               <i class="bi bi-trash3"></i>

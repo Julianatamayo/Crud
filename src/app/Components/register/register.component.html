@@ -52,6 +52,22 @@
             placeholder="name@example.com"
           />
           <label for="floatingInput">Email</label>
+          <span
+            *ngIf="
+              registrarUsuario.get('email')?.hasError('required') &&
+              registrarUsuario.get('email')?.touched
+            "
+            class="text-danger errorlabel"
+            >El correo electronico es requerido</span
+          >
+          <span
+            *ngIf="
+              registrarUsuario.get('email')?.hasError('email') &&
+              registrarUsuario.get('email')?.touched
+            "
+            class="text-danger errorlabel"
+            >El correo electronico es inavlido</span
+          >
         </div>
         <div class="form-floating mb-3">
           <input
@@ -61,6 +77,31 @@
             placeholder="Password"
           />
           <label>Password</label>
+          <span
+            *ngIf="
+              registrarUsuario.get('password')?.hasError('required') &&
+              registrarUsuario.get('password')?.touched
+            "
+            class="text-danger errorlabel"
+            >La contraseña es obligatoria</span
+          >
+          <span
+            *ngIf="
+              registrarUsuario.get('password')?.hasError('minlength') &&
+              registrarUsuario.get('password')?.touched
+            "
+            class="text-danger errorlabel"
+            >La contraseña debe tener mínimo 8 carácteres</span
+          >
+          <span
+            *ngIf="
+              registrarUsuario.get('password')?.hasError('pattern') &&
+              registrarUsuario.get('password')?.touched
+            "
+            class="text-danger errorlabel"
+            >La contraseña debe incluir números, minúsculas, mayúsculas y
+            carácteres especiales ('.-_!#^~@$)</span
+          >
         </div>
 
         <div>
@@ -75,6 +116,7 @@
         <div class="d-grid gap-2 d-grid mx-auto">
           <button
             class="btn btn-primary"
+            [disabled]="registrarUsuario.invalid"
             type="button"
             (click)="enviarFormulario()"
           >

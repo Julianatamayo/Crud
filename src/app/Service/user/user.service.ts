@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-
+import { ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: 'root',
 })
@@ -12,7 +12,8 @@ export class UserService {
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   // Registrar con usuario y contraseña
@@ -23,10 +24,24 @@ export class UserService {
         this.SendVerificationMail();
         this.SetUserData(result.user, userInfo);
         this.router.navigate(['login']);
-        window.alert('Ingrese sus datos para iniciar session');
+        // window.alert('Ingrese sus datos para iniciar session');
+        this.toastr.success('¡Registro exitoso!', 'Éxito');
       })
       .catch((error) => {
-        window.alert(error.message);
+        console.log(error.message);
+        // window.alert(error.message);
+        if (
+          (error.message =
+            'Firebase: The email address is already in use by another account')
+        ) {
+          this.toastr.error(
+            'Este correo ya se encuentra registrado',
+            'Major Error',
+            {
+              timeOut: 3000,
+            }
+          );
+        }
       });
   }
 
@@ -90,5 +105,4 @@ export class UserService {
   deleteUser(uid: any) {
     return this.afs.collection('users').doc(uid).delete(); //elimina un solo usuario
   }
-  
 }

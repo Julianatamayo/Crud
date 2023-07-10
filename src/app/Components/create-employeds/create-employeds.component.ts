@@ -13,12 +13,12 @@ export class CreateEmployedsComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private user: UserService) {
     this.crearUsuario = this.fb.group({
-      identifiacion: ['', Validators.required],
+      identificacion: ['', Validators.required],
       name: ['', Validators.required],
       apellido: ['', Validators.required],
       telefono: ['', Validators.required],
       password: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       rol: ['', Validators.required],
     });
     this.randomString = this.generateRandomString(28);
@@ -26,17 +26,18 @@ export class CreateEmployedsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  enviarFormulario() {
+  crearEmpleado() {
     let data = {
       uid: this.randomString,
       email: this.crearUsuario.value.email,
-      identificacion: this.crearUsuario.value.identifiacion,
+      identificacion: this.crearUsuario.value.identificacion,
       name: this.crearUsuario.value.name,
       apellido: this.crearUsuario.value.apellido,
       telefono: this.crearUsuario.value.telefono,
       password: this.crearUsuario.value.password,
       rol: this.crearUsuario.value.rol,
     };
+    console.log(data);
 
     this.user.SetUserData(data, data);
     this.crearUsuario.reset();

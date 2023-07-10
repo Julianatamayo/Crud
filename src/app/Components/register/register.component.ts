@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../Service/user/user.service';
@@ -10,14 +12,25 @@ import { UserService } from '../../Service/user/user.service';
 export class RegisterComponent implements OnInit {
   registrarUsuario: FormGroup;
 
-  constructor(private fb: FormBuilder, private user: UserService) {
+  constructor(
+    private fb: FormBuilder,
+    private user: UserService,
+    private toastr: ToastrService
+  ) {
     this.registrarUsuario = this.fb.group({
       identifiacion: ['', Validators.required],
       name: ['', Validators.required],
       apellido: ['', Validators.required],
       telefono: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$'),
+        ],
+      ],
       rol: ['', Validators.required],
     });
   }

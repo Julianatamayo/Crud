@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
       this.finalAllUser = this.allUsers.slice(0, 5);
       this.pagination = Math.floor(this.allUsers.length / 5);
 
-      // console.log(this.pagination);
+      console.log(this.allUsers);
     });
   }
 
